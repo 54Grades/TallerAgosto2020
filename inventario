@@ -1,0 +1,3 @@
+[webserver]
+Centos ansible_hosts=192.168.56.108
+Ubuntu ansible_hosts=192.168.56.104

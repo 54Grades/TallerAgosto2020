@@ -1,0 +1,23 @@
+- hosts: webserver
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+
+  vars_files:
+  - ./templates/loadbalancer_vars.yml
+
+  roles:
+  - role: apache-centos
+    when: ansible_facts['os_family'] == "RedHat"
+  - role: apache-debian
+    when: ansible_facts['os_family'] == "Debian"
+
+  tasks:
+  - name: Create loadbalancer configuration
+    template:
+      src: templates/loadbalancer.j2
+      dest: /etc/httpd/vhost.d/loadbalancer.conf
+      owner: root
+      mode: 0644
+    when: ansible_facts['os_family'] == "RedHat"
+    notify: Restart httpd
