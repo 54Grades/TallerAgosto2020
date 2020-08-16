@@ -1,6 +1,6 @@
 ---
-  - name: Restart httpd
+  - name: Restart apache2
     service:
-      name: httpd
+      name: apache2
       state: restarted
       enabled: yes
