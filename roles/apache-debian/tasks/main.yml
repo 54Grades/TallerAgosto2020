@@ -1,19 +1,4 @@
 ---
-- hosts: webserver
-  remote_user: ansible
-  become: yes
-  become_method: sudo
-  vars:
-    packages:
-      - httpd
-      - php
-      - mariadb-server
-      - mariadb
-    sitio: chicken
-    server: www.chicken.com.uy
-    hostmaster: admin@chicken.com.uy
-
-  tasks:
   - name: Install Obligatorio software
     yum:
       name: "{{ packages }}"
