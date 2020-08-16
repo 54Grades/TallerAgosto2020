@@ -17,7 +17,7 @@
     path: /etc/httpd/conf/httpd.conf
     line: IncludeOptional vhost.d/*.conf
 
-- name: Start and enable services
+- name: Start and enable service
   services:
     name: httpd
     state: started 
