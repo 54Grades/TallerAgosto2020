@@ -21,9 +21,10 @@
       mode: 0644
     when: ansible_facts['os_family'] == "RedHat"
     notify: Restart httpd
+    
   - name: Create loadbalancer configuration
     template:
-      src: templates/loadbalancer.j2
+      src: templates/apache2.j2
       dest: /etc/apache2/sites-enabled/000-default.conf
       owner: root
       mode: 0644
