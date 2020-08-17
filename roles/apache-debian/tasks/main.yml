@@ -1,8 +1,9 @@
 ---
   - name: Install Obligatorio software
-    yum:
-      name: "{{ packages }}"
+    apt:
+      name: apache2
       state: latest
+      update_cache: yes
 
   - name: Create virtualhost config directory
     file:
