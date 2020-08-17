@@ -1,8 +1,8 @@
 <Proxy balancer://{{ nombre_cluster }}>
 
-    BalancerMember http://{{ nodo1 }}:{{ puerto1 }}/
+    BalancerMember http://{{ node1 }}:{{ port1 }}/
 
-    BalancerMember http://{{ nodo2 }}:{{ puerto2 }}/
+    BalancerMember http://{{ node2 }}:{{ port2 }}/
 </Proxy>
 
 <VirtualHost *:80>
