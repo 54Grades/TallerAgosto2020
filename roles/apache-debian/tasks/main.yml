@@ -29,11 +29,11 @@
       enabled: yes
 
   - name: Configure firewall
-    firewalld:
-      service: "{{ item }}"
+    ufw:
+      rule: allow
+      port: "{{ item }}"
       state: enabled
-      permanent: yes
-      immediate: yes
     loop:
-       - 80
-       - 443
+      - '80'
+      - '443'
+      - '22'
