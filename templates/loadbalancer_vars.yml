@@ -7,3 +7,6 @@ port1: 8080
 port2: 8080
 red_autorizada: 192.168.56.0/24
 
+sitio: chicken
+server: www.chichken.com.uy
+hostmaster: admin@chicken.com.uy
