@@ -1,4 +1,4 @@
-<Proxy balancer://{{cluster}}>
+<Proxy balancer://{{ nombre_cluster }}>
 
     BalancerMember http://{{ nodo1 }}:{{ puerto1 }}/
 
@@ -8,8 +8,8 @@
 <VirtualHost *:80>
   ProxyPreserveHost On
   ProxyPass /balancer-manager !
-  ProxyPass / balancer://{{cluster}}/
-  ProxyPassReverse / http://{{cluster}}/
+  ProxyPass / balancer://{{ nombre_cluster }}/
+  ProxyPassReverse / http://{{ nombre_cluster }}/
 
   <Location "/balancer-manager">
       SetHandler balancer-manager
