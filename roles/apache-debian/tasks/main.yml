@@ -30,14 +30,11 @@
       mode: '0644'
     notify: Restart apache2
 
-  - name: Start and enable apache
+  - name: Start and enable apache2
     service:
-      name: "{{ item }}"
+      name: apache2
       state: started
       enabled: yes
-    loop: 
-       - httpd
-       - mariadb-server
 
   - name: Configure firewall
     firewalld:
@@ -46,5 +43,5 @@
       permanent: yes
       immediate: yes
     loop:
-       - http
-       - mysql
+       - 80
+       - 443
