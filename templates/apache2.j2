@@ -1,0 +1,24 @@
+<Proxy balancer://{{cluster}}>
+
+    # Server 1
+    BalancerMember http://{{ nodo1 }}:{{ puerto1 }}/
+
+    # Server 2
+    BalancerMember http://{{ nodo2 }}:{{ puerto2 }}/
+</Proxy>
+
+<VirtualHost *:80>
+  ProxyPass / balancer://{{cluster}}/
+  ProxyPassReverse / http://{{cluster}}/
+
+  ServerName {{ server }}
+  ServerAdmin {{ hostmaster }}
+  DocumentRoot /var/www/{{ sitio }}/html
+  CustomLog /var/log/apache2/{{ sitio }}_access.log combined
+  ErrorLog /var/log/apache2/{{ sitio }}_error.log
+  <Directory /var/www/{{ sitio }}/html>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+  </Directory>
+</VirtualHost>
