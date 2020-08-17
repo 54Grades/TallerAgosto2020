@@ -22,14 +22,6 @@
       state: present
     notify: Restart apache2
   
-  - name: Create virtualhost configuration
-    template:
-      src: ./templates/apache2.j2
-      dest: /etc/apache2/sites-enabled/000-default.conf
-      owner: root
-      mode: '0644'
-    notify: Restart apache2
-
   - name: Start and enable apache2
     service:
       name: apache2
