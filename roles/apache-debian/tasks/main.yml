@@ -5,38 +5,30 @@
       state: latest
       update_cache: yes
 
-  - name: Create virtualhost config directory
-    file:
-      path: /etc/httpd/vhost.d
-      state: directory
-      mode: '0755'
-      owner: root
-
-  - name: Add virtualhost config directory to hhtpd.conf
-    lineinfile:
-        path: /etc/httpd/conf/httpd.conf
-        line: IncludeOptional vhost.d/*.conf
-
   - name: Create virtualhost content directories
     file:
       path: "{{ item }}"
       recurse: yes
       state: directory
-      owner: apache
-      group: apache
       mode: '0755'
     loop:
       - /var/www/"{{ sitio }}"
       - /var/www/"{{ sitio }}"/html
       - /var/www/"{{ sitio }}"/cgi-bin
 
+  - name: Load apache modules for proxy in Ubuntu
+    apache2_module:
+      name: proxy
+      state: present
+    notify: Restart apache2
+  
   - name: Create virtualhost configuration
     template:
-      src: ./templates/"{{ sitio }}".j2
-      dest: /etc/httpd/vhost.d/"{{ sitio }}".conf
+      src: ./templates/apache2.j2
+      dest: /etc/apache2/sites-enabled/000-default.conf
       owner: root
       mode: '0644'
-    notify: Restart httpd
+    notify: Restart apache2
 
   - name: Start and enable apache
     service:
