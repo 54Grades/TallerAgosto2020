@@ -1,9 +1,7 @@
 <Proxy balancer://{{cluster}}>
 
-    # Server 1
     BalancerMember http://{{ nodo1 }}:{{ puerto1 }}/
 
-    # Server 2
     BalancerMember http://{{ nodo2 }}:{{ puerto2 }}/
 </Proxy>
 
